@@ -9,7 +9,7 @@ Provides a simple, opinionated, directive implementation of affix, which works w
 
 Install like any other package:
 ```bash
-$ npm install @nic/vue3-affix
+$ npm install @unnamed-nic/vue3-affix
 ```
 
 Make sure you have the classes `hidden` and `fixed` available through CSS.
