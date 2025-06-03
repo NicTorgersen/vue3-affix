@@ -20,7 +20,7 @@ Make sure you have the classes `hidden` and `fixed` available through CSS.
 
 Import and register 
 ```js
-import Affix from "@nic/vue3-affix";
+import Affix from "@unnamed-nic/vue3-affix";
 
 const app = createApp({ /* ... */});
 
