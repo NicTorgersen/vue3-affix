@@ -36,7 +36,7 @@ function createGhostElement(style) {
 */
 const affix = {
     mounted(element, binding) {
-        const ghostElement = createGhostElement(`width: ${element.offsetWidth}; height: ${element.offsetHeight}px;`);
+        const ghostElement = createGhostElement(`width: ${element.offsetWidth}px; height: ${element.offsetHeight}px;`);
         element.parentElement.insertBefore(ghostElement, element);
 
         element._handleScroll = (_) => {
