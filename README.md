@@ -42,7 +42,3 @@ Customize throttle delay (default should be fine in most cases)
 ```html
 <div v-affix.1000ms>I will be affixed</div>
 ```
-
-### Considerations
-
-This directive is a quick and dirty implementation of an `affix to top` pattern. The directive will recalculate sizes and positions every scroll tick which might impact performance.
