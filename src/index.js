@@ -28,6 +28,36 @@ function createGhostElement(style) {
     return ghost;
 }
 
+function throttle(callback, delay) {
+    let timer = null;
+
+    return (...args) => {
+        if (timer === null) {
+            callback(...args);
+
+            timer = setTimeout(() => {
+                timer = null;
+            }, delay);
+        }
+    }
+}
+
+const defaultThrottleDelay = 250;
+
+const parseModifiers = (modifiers) => {
+    const parsedModifiers = {
+        delay: defaultThrottleDelay,
+    }
+
+    for (const modifier in modifiers) {
+        if (modifier.endsWith("ms")) {
+            parsedModifiers.delay = modifier.slice(0, modifier.indexOf("ms"));
+        }
+    }
+
+    return parsedModifiers;
+}
+
 /**
 * This directive calculates element dimensions every scroll tick
 * because the size of the `document` might change at any time.
@@ -39,7 +69,9 @@ const affix = {
         const ghostElement = createGhostElement(`width: ${element.offsetWidth}px; height: ${element.offsetHeight}px;`);
         element.parentElement.insertBefore(ghostElement, element);
 
-        element._handleScroll = (_) => {
+        const { delay: throttleDelay } = parseModifiers(binding.modifiers);
+
+        element._handleScroll = throttle((_) => {
             let {
                 elementBaseWidth,
                 elementBaseHeight,
@@ -66,11 +98,11 @@ const affix = {
 
                 ghostElement.classList.add("hidden");
             }
-        }
+        }, throttleDelay);
 
-        element._handleResize = (_) => {
+        element._handleResize = throttle((_) => {
             element.style["width"] = `${element.parentElement.offsetWidth}px`;
-        }
+        }, throttleDelay);
 
         window.addEventListener("scroll", element._handleScroll);
         window.addEventListener("resize", element._handleResize);

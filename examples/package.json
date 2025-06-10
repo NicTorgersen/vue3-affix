@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@unnamed-nic/vue3-affix": "^1.0.1",
+    "@unnamed-nic/vue3-affix": "^1.1.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
